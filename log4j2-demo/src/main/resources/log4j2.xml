@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+status="WARN" 表示日志框架本身的输出日志级别
+monitorInterval 自动加载配置文件的间隔时间，不低于5秒
+-->
+<Configuration status="debug" monitorInterval="5">
+    <!--    集中配置进行管理-->
+    <properties>
+        <property name="LOG_HOME">/logs</property>
+    </properties>
+
+    <!--    控制台输出的appender-->
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+        <!--    日志文件输出的appender-->
+        <File name="file" fileName="myfile.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] %l %c{36} - %msg%n"/>
+        </File>
+
+        <Async name="AsyncAppender">
+            <Appender ref="file"></Appender>
+        </Async>
+
+        <!--    使用随机读写流的日志文件输出，性能提高-->
+        <RandomAccessFile name="accessFile" fileName="myAcclog.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] %l %c{36} - %msg%n"/>
+        </RandomAccessFile>
+
+        <!--    按照一定规则拆分的日志文件的appender-->
+        <RollingFile name="rollingFile" fileName="myrollog.log"
+                     filePattern="/logs/$${date:yyyy-MM-dd}/myrollog-%d{yyyy-MM-dd-HH-mm}-%i.log">
+            <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"></ThresholdFilter>
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level] %l %c{36} - %msg%n"></PatternLayout>
+            <Policies>
+                <!--            在系统启动时,触发拆分规则，产生一个新的日志文件-->
+                <OnStartupTriggeringPolicy></OnStartupTriggeringPolicy>
+                <!--            按照文件大小拆分-->
+                <SizeBasedTriggeringPolicy size="10MB"></SizeBasedTriggeringPolicy>
+                <!--            按照时间节点拆分，规则根据filePattern定义的-->
+                <TimeBasedTriggeringPolicy></TimeBasedTriggeringPolicy>
+            </Policies>
+            <!--        在同一个目录下，限定文件的个数为30个，超过进行覆盖-->
+            <DefaultRolloverStrategy max="30"></DefaultRolloverStrategy>
+        </RollingFile>
+    </Appenders>
+
+
+    <Loggers>
+        <!--        自定义异步logger
+                    includeLocation: 关闭日志记录的行号信息，若不关系，可能效率比同步查
+                    additivity：不再继承rootlogger对象
+        -->
+<!--        <AsyncLogger name="com.jzj" level="trace" includeLocation="false" additivity="false">-->
+<!--            <AppenderRef ref="Console"/>-->
+<!--            <AppenderRef ref="accessFile"/>-->
+<!--        </AsyncLogger>-->
+        <!--        使用rootLogger配置 日志级别 处理器 -->
+        <Root level="trace">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="AsyncAppender"/>
+        </Root>
+    </Loggers>
+</Configuration>

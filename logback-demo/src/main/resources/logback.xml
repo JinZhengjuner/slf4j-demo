@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!--   配置集中管理属性-->
+    <property name="pattern" value="[%-5Slevel] %d{yyyy-MM-dd HH:mm:ss.SSS} %c %m %L %thread %msg %n"></property>
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <!--   控制输出流对象   默认 System.out 改为System.err-->
+        <target>System.err</target>
+        <!--   日志消息格式的配置-->
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="file" class="ch.qos.logback.core.FileAppender">
+        <!--        文件路径-->
+        <file>logback.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <!--    日志拆分和归档压缩的appender对象-->
+    <appender name="roolFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>roll_logback.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${pattern}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--            按照时间和压缩格式声明压缩的文件名-->
+            <fileNamePattern>rolling.%d{yyyy-MM-dd}.log%i.gz</fileNamePattern>
+            <!--            按照文件的大小拆分-->
+            <maxFileSize>1MB</maxFileSize>
+        </rollingPolicy>
+
+        <!--        日志级别过滤器-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <!--    异步日志-->
+    <appender name="async" class="ch.qos.logback.classic.AsyncAppender">
+        <!--        指定某个具体的appdener对象-->
+        <appender-ref ref="roolFile"></appender-ref>
+    </appender>
+    <!--    root logger配置-->
+    <root level="ALl">
+        <appender-ref ref="console"></appender-ref>
+        <appender-ref ref="async"></appender-ref>
+    </root>
+
+    <!--    自定义logger
+    addiitivity表示自定义logger是否继承rootLogger
+    -->
+    <logger name="com.jzj" level="info" addiitivity="false">
+        <appender-ref ref="console"></appender-ref>
+    </logger>
+</configuration>

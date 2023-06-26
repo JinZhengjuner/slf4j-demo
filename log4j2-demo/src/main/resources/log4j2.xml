@@ -60,7 +60,7 @@ monitorInterval 自动加载配置文件的间隔时间，不低于5秒
         <!--        使用rootLogger配置 日志级别 处理器 -->
         <Root level="trace">
             <AppenderRef ref="Console"/>
-            <AppenderRef ref="AsyncAppender"/>
+<!--            <AppenderRef ref="AsyncAppender"/>-->
         </Root>
     </Loggers>
 </Configuration>

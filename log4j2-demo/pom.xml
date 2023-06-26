@@ -45,6 +45,12 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.83_noneautotype</version>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+            <scope>provided</scope>
+        </dependency>
 
 
         <dependency>
@@ -52,6 +58,14 @@
             <artifactId>junit</artifactId>
             <version>4.12</version>
         </dependency>
+
+        <!--log4j-->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+
     </dependencies>
 
 </project>

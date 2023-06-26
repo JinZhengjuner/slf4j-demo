@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef">
+  <process id="chuchai" name="chuchai" isExecutable="true">
+    <startEvent id="myEvection"/>
+    <userTask id="cjccsq" name="创建出差申请" activiti:assignee="zhangsan"/>
+    <userTask id="jlsp" name="经理审批" activiti:assignee="jerry"/>
+    <userTask id="zjlsp" name="总经理审批" activiti:assignee="jack"/>
+    <userTask id="cwsp" name="财务审批" activiti:assignee="rose"/>
+    <endEvent id="sid-2201d4ec-ae80-4a2a-9e35-2fbf592de3d8"/>
+    <sequenceFlow id="sid-92e17a5f-8c43-4544-826a-7934589af1bc" sourceRef="jlsp" targetRef="zjlsp"/>
+    <sequenceFlow id="sid-529ec0dd-17cb-4afd-a5ba-150396ab403f" sourceRef="zjlsp" targetRef="cwsp"/>
+    <sequenceFlow id="sid-6bded720-74dc-45cc-abc6-93c675d7d53c" sourceRef="cwsp" targetRef="sid-2201d4ec-ae80-4a2a-9e35-2fbf592de3d8"/>
+    <sequenceFlow id="sid-a151c817-b6f4-41b9-94eb-9688370de571" sourceRef="cjccsq" targetRef="jlsp"/>
+    <sequenceFlow id="sid-25e2f352-9242-4640-8367-8ae00fe7c2f5" sourceRef="myEvection" targetRef="cjccsq"/>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_chuchai">
+    <bpmndi:BPMNPlane bpmnElement="chuchai" id="BPMNPlane_chuchai">
+      <bpmndi:BPMNShape id="shape-af6ed215-6ac2-4aa9-bb04-9c916b75a174" bpmnElement="myEvection">
+        <omgdc:Bounds x="-220.0" y="-30.0" width="30.0" height="30.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape-f0363f52-e5b2-4336-bc57-0ee2bc4e1bc8" bpmnElement="cjccsq">
+        <omgdc:Bounds x="-45.0" y="-60.0" width="100.0" height="80.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape-237c2d1b-fff7-4e4d-91d4-0d3d606f6cf7" bpmnElement="jlsp">
+        <omgdc:Bounds x="105.0" y="-60.0" width="100.0" height="80.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape-c4385b41-1305-4c77-bac6-952ae56a7732" bpmnElement="zjlsp">
+        <omgdc:Bounds x="260.0" y="-60.0" width="100.0" height="80.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape-6d70f787-8939-416b-8959-8235082f678b" bpmnElement="cwsp">
+        <omgdc:Bounds x="420.0" y="-60.0" width="100.0" height="80.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape-3a776f43-2f63-4b3d-9bb5-c4d71d4c2b75" bpmnElement="sid-2201d4ec-ae80-4a2a-9e35-2fbf592de3d8">
+        <omgdc:Bounds x="580.0" y="-30.0" width="30.0" height="30.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="edge-a63a3410-7b3f-4928-a19e-ff9d6cce4e16" bpmnElement="sid-92e17a5f-8c43-4544-826a-7934589af1bc">
+        <omgdi:waypoint x="205.0" y="-20.0"/>
+        <omgdi:waypoint x="260.0" y="-20.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge-d7048daf-77c8-495a-b96f-2ab06038a85a" bpmnElement="sid-529ec0dd-17cb-4afd-a5ba-150396ab403f">
+        <omgdi:waypoint x="360.0" y="-20.0"/>
+        <omgdi:waypoint x="420.0" y="-20.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge-5a8291d8-9adc-4161-a300-af02dcc7ecac" bpmnElement="sid-6bded720-74dc-45cc-abc6-93c675d7d53c">
+        <omgdi:waypoint x="520.0" y="-20.0"/>
+        <omgdi:waypoint x="580.0" y="-22.5"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge-96b9e659-12d3-43e9-9f05-e323579d2558" bpmnElement="sid-a151c817-b6f4-41b9-94eb-9688370de571">
+        <omgdi:waypoint x="55.0" y="-20.0"/>
+        <omgdi:waypoint x="150.0" y="-20.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge-f818a16a-fbef-4d04-a167-b20e56d5735d" bpmnElement="sid-25e2f352-9242-4640-8367-8ae00fe7c2f5">
+        <omgdi:waypoint x="-190.0" y="-22.5"/>
+        <omgdi:waypoint x="-45.0" y="-20.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

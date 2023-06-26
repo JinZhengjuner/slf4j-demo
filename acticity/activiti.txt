@@ -1,0 +1,7 @@
+表名字的含义：
+    GE:通用
+    HI:history
+    RE:流程定义
+    RU:runtime
+activity提供的工具类：
+

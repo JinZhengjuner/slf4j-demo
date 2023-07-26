@@ -22,6 +22,12 @@
     </build>
 
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>31.1-jre</version>
+        </dependency>
         <!--        异步日志依赖-->
         <dependency>
             <groupId>com.lmax</groupId>

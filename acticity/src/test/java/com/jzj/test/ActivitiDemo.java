@@ -79,8 +79,24 @@ public class ActivitiDemo {
             log.info("任务id：{}", task.getId());
             log.info("任务负责人：{}", task.getAssignee());
             log.info("任务名称：{}", task.getName());
-
         }
+    }
 
+    /**
+     * 完成节点审批
+     * ACT HI TASKINSTACT HI ACIINST
+     * ACI HI IDENTITYLINK
+     * ACT RU TASK
+     * ACT RU IDENTITYLINK
+     * ACT HI TASKINST UPDATE-- 2505
+     * ACT RU EXECUTION UPDATE-- id=2502 - rev =l
+     * ACT HI ACTINSTUPDATE--  id=2504
+     * ACT RU TASKDEIETE -- id = 2505
+     */
+    @Test
+    public void completeTask(){
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+        TaskService taskService = processEngine.getTaskService();
+        taskService.complete("2505");//任务id
     }
 }
